@@ -3,6 +3,8 @@ const express = require('express');
 const productRoute = require('./routes/products');
 const categoryRoute = require('./routes/categories');
 const customerRoute = require('./routes/customers');
+const userRoute = require('./routes/users');
+const login = require('./routes/auth');
 const app = express();
 
 
@@ -22,6 +24,8 @@ app.use(express.json());
 app.use('/api/products', productRoute);
 app.use('/api/categories', categoryRoute);
 app.use('/api/customers', customerRoute);
+app.use('/api/register', userRoute);
+app.use('/api/auth', login);
 
 
 const port = process.env.PORT || 3000
