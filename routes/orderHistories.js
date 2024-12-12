@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { OrderHistory, validate } = require('../models/orderHistory');
-const auth = require('../middleware/auth'); // Assuming you have auth middleware
+const auth = require('../middleware/auth');
 
-// Get all orders (with optional filtering)
+
 router.get('/', auth, async (req, res) => {
     try {
         const filters = {};
@@ -19,7 +19,7 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// Get order by ID
+
 router.get('/:id', auth, async (req, res) => {
     try {
         const order = await OrderHistory.findById(req.params.id)
@@ -31,7 +31,7 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-// Create new order
+
 router.post('/', auth, async (req, res) => {
     try {
         const { error } = validate(req.body);
@@ -45,7 +45,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-// Update order status
+
 router.patch('/:id/status', auth, async (req, res) => {
     try {
         const { status } = req.body;
@@ -65,7 +65,7 @@ router.patch('/:id/status', auth, async (req, res) => {
     }
 });
 
-// Update payment status
+
 router.patch('/:id/payment', auth, async (req, res) => {
     try {
         const { paymentStatus } = req.body;
@@ -85,7 +85,7 @@ router.patch('/:id/payment', auth, async (req, res) => {
     }
 });
 
-// Update delivery status and date
+
 router.patch('/:id/delivery', auth, async (req, res) => {
     try {
         const { deliveryStatus, deliveryDate } = req.body;
@@ -104,7 +104,7 @@ router.patch('/:id/delivery', auth, async (req, res) => {
     }
 });
 
-// Delete order (maybe restricted to admin only)
+
 router.delete('/:id', auth, async (req, res) => {
     try {
         const order = await OrderHistory.findByIdAndDelete(req.params.id);
